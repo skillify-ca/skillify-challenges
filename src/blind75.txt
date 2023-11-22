@@ -1,0 +1,3 @@
+This is an incomplete list of 75 popular coding interview questions
+
+- Find duplicate in array
