@@ -31,7 +31,34 @@ type RevenueResult = {
   revenue: number;
 };
 
-function getSalesData(products: string[], sales: Sale[], date: string) {}
+function getSalesData(products: string[], sales: Sale[], date: string) {
+  const results: RevenueResult[] = [];
+
+  // for each product calculate the total revenue for the given date
+
+  for (let i = 0; i < products.length; i++) {
+    const product = products[i];
+    const productSalesForDate = sales.filter(
+      (sale) => sale.product === product && sale.date === date
+    );
+    const totalRevenue = productSalesForDate.reduce(
+      (total, sale) => total + sale.price,
+      0
+    );
+    results.push({
+      product: product,
+      revenue: totalRevenue,
+    });
+  }
+
+  // sort the products by revenue
+  results.sort((a, b) => b.revenue - a.revenue);
+  // return the result
+  return {
+    date: date,
+    results,
+  };
+}
 
 // expected result
 const expectedResult = getSalesData(products, sales, "2020-01-01");
